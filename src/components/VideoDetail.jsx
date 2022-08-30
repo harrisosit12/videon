@@ -23,9 +23,9 @@ const VideoDetail = () => {
       (data) => setVideos(data.items)
     );
 
-    // fetchAPI(`commentThreads?part=snippet&videoId=${id}`).then((data) =>
-    //   setVideoComments(data.items)
-    // );
+    fetchAPI(`commentThreads?part=snippet&videoId=${id}`).then((data) =>
+      setVideoComments(data)
+    );
   }, [id]);
 
   if (!videoDetail?.snippet) return " Loading...";
@@ -35,6 +35,9 @@ const VideoDetail = () => {
     statistics: { viewCount, likeCount },
   } = videoDetail;
 
+  const { items } = videoComments;
+
+  console.log(videoComments);
   return (
     <Box minHeight="95vh">
       <Stack
@@ -50,7 +53,7 @@ const VideoDetail = () => {
             className="react-player"
             width="75%"
             height="75%"
-            playing
+            // playing
             controls
           />
           <Typography color="#fff" variant="h5" fontWeight="bold" p={2}>
@@ -87,7 +90,36 @@ const VideoDetail = () => {
               </Typography>
             </Stack>
           </Stack>
+
+          <Stack direction="column" p={1} m={2}>
+            <Typography
+              variant="body1"
+              sx={{ opacity: 0.9, fontSize: 17, color: "#ffff" }}
+            >
+              {items[0].snippet.topLevelComment.snippet.textDisplay}
+
+              <Typography variant="body1" sx={{ opacity: 0.9, fontSize: 14 }}>
+                <Moment fromNow>
+                  {items[0].snippet.topLevelComment.snippet.updatedAt}
+                </Moment>
+              </Typography>
+            </Typography>
+
+            <Typography
+              variant="body1"
+              sx={{ opacity: 1, fontSize: 18, color: "#ffff" }}
+            >
+              {items[0].snippet.topLevelComment.snippet.authorDisplayName}
+              <img
+                src={
+                  items[0].snippet.topLevelComment.snippet.authorProfileImgUrl
+                }
+                alt="url"
+              />
+            </Typography>
+          </Stack>
         </Box>
+
         <Box
           px={2}
           py={{ md: 1, xs: 5 }}

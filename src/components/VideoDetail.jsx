@@ -23,9 +23,9 @@ const VideoDetail = () => {
       (data) => setVideos(data.items)
     );
 
-    fetchAPI(`commentThreads?part=snippet&videoId=${id}`).then((data) =>
-      setVideoComments(data)
-    );
+    // fetchAPI(`commentThreads?videoId=${id}`).then((data) =>
+    //   setVideoComments(data)
+    // );
   }, [id]);
 
   if (!videoDetail?.snippet) return " Loading...";
@@ -35,9 +35,10 @@ const VideoDetail = () => {
     statistics: { viewCount, likeCount },
   } = videoDetail;
 
-  const { items } = videoComments;
+  // const { items } = videoComments;
 
-  console.log(videoComments);
+  // console.log(videoComments);
+
   return (
     <Box minHeight="95vh">
       <Stack
@@ -91,7 +92,7 @@ const VideoDetail = () => {
             </Stack>
           </Stack>
 
-          <Stack direction="column" p={1} m={2}>
+          {/* <Stack direction="column" p={1} m={2}>
             <Typography
               variant="body1"
               sx={{ opacity: 0.9, fontSize: 17, color: "#ffff" }}
@@ -107,17 +108,11 @@ const VideoDetail = () => {
 
             <Typography
               variant="body1"
-              sx={{ opacity: 1, fontSize: 18, color: "#ffff" }}
+              sx={{ opacity: 1, fontSize: 18, color: "#ffff", p: 1, m: 2 }}
             >
               {items[0].snippet.topLevelComment.snippet.authorDisplayName}
-              <img
-                src={
-                  items[0].snippet.topLevelComment.snippet.authorProfileImgUrl
-                }
-                alt="url"
-              />
             </Typography>
-          </Stack>
+          </Stack> */}
         </Box>
 
         <Box
